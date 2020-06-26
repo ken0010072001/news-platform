@@ -28,12 +28,12 @@ const PubliserWrapper = styled.div`
 const PubliserLogo = styled.div`
   height: 30px;
   width: 30px;
-  background-color: #bbb;
+  background-color: #bdbdbd;
   border-radius: 50%;
   display: inline-block;
   text-align: center;
   line-height: 28px;
-  color: white;
+  color: #fafafa;
   margin-left: 15px;
 `
 const ArticleInfo = styled.div`
@@ -50,7 +50,7 @@ const Publiser = styled.div`
 `
 const ArticleDate = styled.div`
     width: 100%;
-    color: #808080bf;
+    color: rgba(0, 0, 0, 0.54);
     font-size: 10px;
     font-weight: 400;
 `
@@ -68,6 +68,7 @@ const ArticleTitle = styled.h1`
   width: 100%;
   margin: 0;
   font-size: 21px;
+  color: rgba(0, 0, 0, 0.87);
 `
 
 const ArticleSub = styled.h2`
@@ -75,7 +76,7 @@ const ArticleSub = styled.h2`
   height: auto;
   font-size: 12px;
   font-weight: 400;
-  color: gray;
+  color: rgba(0, 0, 0, 0.54);
 `
 
 function NewsCard({article}) {
