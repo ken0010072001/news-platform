@@ -15,10 +15,6 @@ function Home() {
         articles: res.data.articles
       })
     })
-    dispatch({
-      type: 'SET_ARTICLES',
-      articles: [{abc: 123}]
-    })
   });
 
   return (
