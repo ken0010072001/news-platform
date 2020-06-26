@@ -3,12 +3,12 @@ import { css } from 'styled-components'
 const mediaMaxSizes = {
   desktop: 99999,
   tablet: 1023,
-  mobile: 767,
+  mobile: 425,
 }
 
 const medaiMinSizes = {
   desktop: 1024,
-  tablet: 768,
+  tablet: 426,
   mobile: 0
 }
 
