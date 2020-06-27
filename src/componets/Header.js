@@ -1,6 +1,9 @@
 import React from 'react'
+import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
 import { media } from '../utils/style/'
 import styled from 'styled-components'
+import isEmpty from 'lodash/isEmpty'
 
 const HeaderBar = styled.div`
   width: 100%;
@@ -56,9 +59,43 @@ const SearchField = styled.div`
     }
   }
 `
+const apiKey = '398aaec7c9e843dab54d24151bef6a3d'
 
 
 function Header() {
+  const dispatch = useDispatch()
+  const searchState = useSelector(state => state.searching)
+
+  const doSearch = (evt) => {
+    let searchText = evt.target.value;// this is the search text
+    if(!isEmpty(searchText)) {
+      if (!searchState) { //is false then set to searching
+        dispatch({
+          type: 'SET_SEARCH_STATE',
+          searching: true
+        })
+      }
+      setTimeout(() => {
+        axios.get(`https://newsapi.org/v2/everything?q=${searchText}&apiKey=${apiKey}&pageSize=100`)
+        .then(res => {
+          dispatch({
+            type: 'SET_SEARCH_ARTICLES',
+            searchArticles: res.data.articles
+          })
+        })
+        //search function
+      }, 300);
+    } else {
+      dispatch({
+        type: 'SET_SEARCH_ARTICLES',
+        searchArticles: []
+      })
+      dispatch({
+        type: 'SET_SEARCH_STATE',
+        searching: false
+      })
+    }
+  }
 
   return (
     <HeaderBar>
@@ -68,6 +105,7 @@ function Header() {
           <input
             type="text"
             placeholder="Search"
+            onChange={evt => doSearch(evt)}
           />
         </SearchField>
       </HeaderWrapper>

@@ -2,7 +2,9 @@ import { createStore } from 'redux'
 
 const initialState = {
   articles: [],
-  pager: 1
+  pager: 1,
+  searching: false,
+  searchArticles: []
 }
 
 function newsState(state = initialState, action) {
@@ -16,6 +18,16 @@ function newsState(state = initialState, action) {
       return {
         ...state,
         pager: action.pager
+      }
+    case 'SET_SEARCH_STATE':
+      return {
+        ...state,
+        searching: action.searching
+      }
+    case 'SET_SEARCH_ARTICLES':
+      return {
+        ...state,
+        searchArticles: action.searchArticles
       }
     default:
       return state
