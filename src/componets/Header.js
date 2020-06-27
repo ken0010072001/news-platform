@@ -41,6 +41,9 @@ const HeaderTitle = styled.div`
 `
 
 const SearchField = styled.form`
+  ${media.mobile`
+    width: 67px;
+  `}
   color: #ffffff;
   margin: 5px 10px 5px 0;
   display: flex;
@@ -52,9 +55,6 @@ const SearchField = styled.form`
     color: #ffffff;
     font-size: 13px;
     outline: none;
-    ${media.mobile`
-      width: 67px;
-    `}
     ::placeholder,
     ::-webkit-input-placeholder {
       font-size: 16px;
@@ -85,7 +85,6 @@ const RemoveInput = styled.img`
 
 function Header() {
   const dispatch = useDispatch()
-  const searchForm = useRef(null)
   const searchState = useSelector(state => state.searching)
 
   const removeInput = () => {
