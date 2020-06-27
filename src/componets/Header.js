@@ -49,7 +49,11 @@ const SearchField = styled.form`
     border: none;
     height: 33px;
     color: #ffffff;
+    font-size: 13px;
     outline: none;
+    ${media.mobile`
+      width: 67px;
+    `}
     ::placeholder,
     ::-webkit-input-placeholder {
       font-size: 16px;
