@@ -12,17 +12,13 @@ import InfiniteScroll from "react-infinite-scroll-component";
 const CardContainer = styled(InfiniteScroll)`
   display: flex;
   flex-wrap: wrap;
+  margin-top: 20px;
+  justify-content: space-around;
   ${media.desktop`
     width: 1024px;
     height: 100%;
     margin: auto;
     justify-content: space-between;
-  `}
-  ${media.tablet`
-    justify-content: space-around;
-  `}
-  ${media.mobile`
-    justify-content: space-around;
   `}
 `
 

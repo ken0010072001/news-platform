@@ -1,17 +1,26 @@
 import React from 'react'
 import get from 'lodash/get'
 import styled from 'styled-components'
+import { media } from '../utils/style/'
 import  { format } from 'date-fns'
 
 const Card = styled.a`
   width: 333px;
   height: 500px;
-  margin-top: 10px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   overflow: hidden;
   text-overflow: ellipsis;
   text-decoration: none;
   color: black;
+  ${media.desktop`
+    margin-top: 60px;
+  `}
+  ${media.tablet`
+    margin-top: 40px;
+  `}
+  ${media.mobile`
+    margin-top: 60px;
+  `}
 `
 const ArticleInfoWrapper = styled.div`
   display: flex;
