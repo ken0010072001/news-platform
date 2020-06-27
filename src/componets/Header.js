@@ -1,4 +1,4 @@
-import React from 'react'
+import React , { useRef } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { media } from '../utils/style/'
@@ -39,13 +39,17 @@ const HeaderTitle = styled.div`
   margin: 15px 0 15px 10px;
 `
 
-const SearchField = styled.div`
+const SearchField = styled.form`
   color: #ffffff;
   margin: 5px 10px 5px 0;
+  display: flex;
+  align-items: center;
   > input {
     background: rgba(255, 255, 255, 0.15);
     border: none;
     height: 33px;
+    color: #ffffff;
+    outline: none;
     ::placeholder,
     ::-webkit-input-placeholder {
       font-size: 16px;
@@ -59,12 +63,40 @@ const SearchField = styled.div`
     }
   }
 `
+
+const SearchLogo = styled.img`
+  width: 25px;
+  height: 25px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 5px 0 5px 10px;
+` 
+
+const RemoveInput = styled.img`
+  width: 25px;
+  height: 25px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 5px 10px 5px 0;
+`
+
 const apiKey = '398aaec7c9e843dab54d24151bef6a3d'
 
 
 function Header() {
   const dispatch = useDispatch()
+  const searchForm = useRef(null)
   const searchState = useSelector(state => state.searching)
+
+  const removeInput = () => {
+    document.getElementById("search-form").reset();
+    dispatch({
+      type: 'SET_SEARCH_ARTICLES',
+      searchArticles: []
+    })
+    dispatch({
+      type: 'SET_SEARCH_STATE',
+      searching: false
+    })
+  }
 
   const doSearch = (evt) => {
     let searchText = evt.target.value;// this is the search text
@@ -101,12 +133,14 @@ function Header() {
     <HeaderBar>
       <HeaderWrapper>
         <HeaderTitle>US NEWS</HeaderTitle>
-        <SearchField>
+        <SearchField id="search-form">
+          <SearchLogo src="search.svg" />
           <input
             type="text"
             placeholder="Search"
             onChange={evt => doSearch(evt)}
           />
+          <RemoveInput src="delete.svg"  onClick={removeInput} type="reset"/>
         </SearchField>
       </HeaderWrapper>
     </HeaderBar>

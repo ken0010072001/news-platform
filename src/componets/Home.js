@@ -22,6 +22,18 @@ const CardContainer = styled(InfiniteScroll)`
     justify-content: space-between;
   `}
 `
+const CardContainerNoInf = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  justify-content: space-around;
+  ${media.desktop`
+    width: 1024px;
+    height: 100%;
+    margin: auto;
+    justify-content: space-between;
+  `}
+`
 
 const Loading = styled.div`
   position: fixed;
@@ -36,7 +48,8 @@ function Home() {
   let [hasMore, setHasMore] = useState(true)
   let pager = useSelector(state => state.pager)
   let articles = useSelector(state => state.articles)
-
+  let searchState = useSelector(state => state.searching)
+  let searchArticles = useSelector(state => state.searchArticles)
 
   //gmail
   // const apiKey = 'c484092dabfd47a68d6da8903622d49a' 
@@ -85,18 +98,28 @@ function Home() {
   return (
     <>
       <Header />
-        <CardContainer className="home-container"
-            dataLength={articles.length}
-            next={fetchMoreData}
-            hasMore={hasMore}
-            loader={<Loading>Loading...</Loading>}
-          >
-          {
-            map(articles, (item, index) => (
-              <Card key={index} article={item}/>
-            ))
-          }
-        </CardContainer>
+        {searchState ? ( // is user searching, show search result
+          <CardContainerNoInf className="home-container">
+            {
+              map(searchArticles, (item, index) => (
+                <Card key={index} article={item}/>
+              ))
+            }
+          </CardContainerNoInf>
+        ) : ( // normal result
+          <CardContainer className="home-container"
+              dataLength={articles.length}
+              next={fetchMoreData}
+              hasMore={hasMore}
+              loader={<Loading>Loading...</Loading>}
+            >
+            {
+              map(articles, (item, index) => (
+                <Card key={index} article={item}/>
+              ))
+            }
+          </CardContainer>
+        )}
     </>
   )
 }
