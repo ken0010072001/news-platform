@@ -33,9 +33,10 @@ const Loading = styled.div`
 
 function Home() {
   const dispatch = useDispatch()
-  let [articles, setArticles] = useState([])
   let [hasMore, setHasMore] = useState(true)
   let pager = useSelector(state => state.pager)
+  let articles = useSelector(state => state.articles)
+
 
   //gmail
   // const apiKey = 'c484092dabfd47a68d6da8903622d49a' 
@@ -46,7 +47,10 @@ function Home() {
   useEffect(() => {
     axios.get(`https://newsapi.org/v2/everything?domains=washingtonpost.com,nytimes.com&apiKey=${apiKey}&pageSize=10&page=1`)
     .then(res => {
-      setArticles(res.data.articles)
+      dispatch({
+        type: 'SET_ARTICLES',
+        articles: res.data.articles
+      })
     })
     if (isEmpty(articles)) {
       dispatch({
@@ -65,11 +69,9 @@ function Home() {
     setTimeout(() => {
       axios.get(`https://newsapi.org/v2/everything?domains=washingtonpost.com,nytimes.com&apiKey=${apiKey}&pageSize=10&page=${pager}`)
       .then(res => {
-        articles = [...articles,...res.data.articles ]
-        setArticles(articles)
         dispatch({
           type: 'SET_ARTICLES',
-          articles: res.data.articles
+          articles: [...articles,...res.data.articles ]
         })
       })
       // after fetch once data, add pager once.
