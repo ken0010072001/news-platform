@@ -52,7 +52,7 @@ const ArticleInfo = styled.div`
     justify-content: center;
 }
 `
-const Publiser = styled.div`
+const Publiser = styled.p`
     font-size: 5px;
     font-weight: 700;
     width: 100%;
@@ -111,7 +111,7 @@ function NewsCard({article}) {
           <ArticleDate>{dateOutput}</ArticleDate>
         </ArticleInfo>
       </ArticleInfoWrapper>
-      <ArticleImg src={articleImg}/>
+      <ArticleImg alt={articleTitle} src={articleImg}/>
       <ArticleDetail>
         <ArticleTitle>{articleTitle}</ArticleTitle>
         <ArticleSub>{articleDescript}</ArticleSub>

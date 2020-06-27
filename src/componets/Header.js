@@ -138,13 +138,13 @@ function Header() {
       <HeaderWrapper>
         <HeaderTitle>US NEWS</HeaderTitle>
         <SearchField id="search-form">
-          <SearchLogo src="search.svg" />
+          <SearchLogo src="search.svg" alt="search input"/>
           <input
             type="text"
             placeholder="Search"
             onChange={evt => doSearch(evt)}
           />
-          <RemoveInput src="delete.svg"  onClick={removeInput} type="reset"/>
+          <RemoveInput src="delete.svg"  onClick={removeInput} type="reset" alt="remove seach input"/>
         </SearchField>
       </HeaderWrapper>
     </HeaderBar>
