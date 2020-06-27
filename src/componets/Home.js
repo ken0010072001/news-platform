@@ -8,7 +8,7 @@ import Card from '../componets/News_card'
 import Header from '../componets/Header'
 import InfiniteScroll from "react-infinite-scroll-component";
 import isEmpty from 'lodash/isEmpty'
-
+import { NEWS_API_KEY } from '../config/app'
 
 const CardContainer = styled(InfiniteScroll)`
   display: flex;
@@ -51,14 +51,9 @@ function Home() {
   let searchState = useSelector(state => state.searching)
   let searchArticles = useSelector(state => state.searchArticles)
 
-  //gmail
-  // const apiKey = 'c484092dabfd47a68d6da8903622d49a' 
-   //hotmail
-  const apiKey = '398aaec7c9e843dab54d24151bef6a3d'
-
   // init the page and get the new when load the page.
   useEffect(() => {
-    axios.get(`https://newsapi.org/v2/everything?domains=washingtonpost.com,nytimes.com&apiKey=${apiKey}&pageSize=10&page=1`)
+    axios.get(`https://newsapi.org/v2/everything?domains=washingtonpost.com,nytimes.com&apiKey=${NEWS_API_KEY}&pageSize=10&page=1`)
     .then(res => {
       dispatch({
         type: 'SET_ARTICLES',
@@ -80,7 +75,7 @@ function Home() {
       return;
     }
     setTimeout(() => {
-      axios.get(`https://newsapi.org/v2/everything?domains=washingtonpost.com,nytimes.com&apiKey=${apiKey}&pageSize=10&page=${pager}`)
+      axios.get(`https://newsapi.org/v2/everything?domains=washingtonpost.com,nytimes.com&apiKey=${NEWS_API_KEY}&pageSize=10&page=${pager}`)
       .then(res => {
         dispatch({
           type: 'SET_ARTICLES',

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { media } from '../utils/style/'
 import styled from 'styled-components'
 import isEmpty from 'lodash/isEmpty'
+import { NEWS_API_KEY } from '../config/app'
 
 const HeaderBar = styled.div`
   width: 100%;
@@ -82,9 +83,6 @@ const RemoveInput = styled.img`
   padding: 5px 10px 5px 0;
 `
 
-const apiKey = '398aaec7c9e843dab54d24151bef6a3d'
-
-
 function Header() {
   const dispatch = useDispatch()
   const searchForm = useRef(null)
@@ -112,7 +110,7 @@ function Header() {
         })
       }
       setTimeout(() => {
-        axios.get(`https://newsapi.org/v2/everything?q=${searchText}&apiKey=${apiKey}&pageSize=100`)
+        axios.get(`https://newsapi.org/v2/everything?q=${searchText}&apiKey=${NEWS_API_KEY}&pageSize=100`)
         .then(res => {
           dispatch({
             type: 'SET_SEARCH_ARTICLES',
