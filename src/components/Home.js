@@ -7,7 +7,6 @@ import styled from 'styled-components'
 import Card from './NewsCard'
 import Header from '../components/Header'
 import InfiniteScroll from "react-infinite-scroll-component";
-import isEmpty from 'lodash/isEmpty'
 import { NEWS_API_KEY } from '../config/app'
 
 const CardContainer = styled(InfiniteScroll)`
