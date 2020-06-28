@@ -82,6 +82,7 @@ const RemoveInput = styled.img`
   height: 25px;
   background: rgba(255, 255, 255, 0.15);
   padding: 5px 10px 5px 0;
+  cursor: pointer;
 `
 
 function Header() {
