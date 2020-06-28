@@ -143,9 +143,9 @@ function Header() {
             placeholder="Search"
             value={inputValue}
             onChange={evt => {
-                 doSearchThrottled(evt.target.value)
-                 setInputValue(evt.target.value)
-              }}
+              doSearchThrottled(evt.target.value)
+              setInputValue(evt.target.value)
+            }}
           />
           <RemoveInput src="delete.svg"  onClick={removeInput} type="reset" alt="remove seach input"/>
         </SearchField>
