@@ -60,12 +60,10 @@ function Home() {
         articles: res.data.articles
       })
     })
-    if (isEmpty(articles)) {
-      dispatch({
-        type: 'SET_PAGER',
-        pager: pager + 1
-      })
-    }
+    dispatch({
+      type: 'SET_PAGER',
+      pager: pager + 1
+    })
   },[]);
 
   const fetchMoreData = () => {

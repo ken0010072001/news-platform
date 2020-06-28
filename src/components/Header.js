@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { media } from '../utils/style'
 import styled from 'styled-components'
 import isEmpty from 'lodash/isEmpty'
+import debounce from 'lodash/debounce'
 import { NEWS_API_KEY } from '../config/app'
 
 const HeaderBar = styled.div`
@@ -85,10 +86,11 @@ const RemoveInput = styled.img`
 
 function Header() {
   const dispatch = useDispatch()
+  const [inputValue, setInputValue] = useState('')
   const searchState = useSelector(state => state.searching)
 
   const removeInput = () => {
-    document.getElementById("search-form").reset();
+    setInputValue('')
     dispatch({
       type: 'SET_SEARCH_ARTICLES',
       searchArticles: []
@@ -99,25 +101,22 @@ function Header() {
     })
   }
 
-  const doSearch = (evt) => {
-    let searchText = evt.target.value;// this is the search text
+  const doSearch = (value) => {
+    let searchText = value // this is the search text
     if(!isEmpty(searchText)) {
       if (!searchState) { //is false then set to searching
         dispatch({
           type: 'SET_SEARCH_STATE',
           searching: true
         })
-      }
-      setTimeout(() => {
-        axios.get(`https://newsapi.org/v2/everything?q=${searchText}&apiKey=${NEWS_API_KEY}&pageSize=100`)
-        .then(res => {
-          dispatch({
-            type: 'SET_SEARCH_ARTICLES',
-            searchArticles: res.data.articles
-          })
+      }         //search function
+      axios.get(`https://newsapi.org/v2/everything?q=${searchText}&apiKey=${NEWS_API_KEY}&pageSize=100`)
+      .then(res => {
+        dispatch({
+          type: 'SET_SEARCH_ARTICLES',
+          searchArticles: res.data.articles
         })
-        //search function
-      }, 300);
+      })
     } else {
       dispatch({
         type: 'SET_SEARCH_ARTICLES',
@@ -130,6 +129,9 @@ function Header() {
     }
   }
 
+  
+  const doSearchThrottled = debounce(doSearch, 300, { 'leading': false })
+
   return (
     <HeaderBar>
       <HeaderWrapper>
@@ -139,7 +141,11 @@ function Header() {
           <input
             type="text"
             placeholder="Search"
-            onChange={evt => doSearch(evt)}
+            value={inputValue}
+            onChange={evt => {
+                 doSearchThrottled(evt.target.value)
+                 setInputValue(evt.target.value)
+              }}
           />
           <RemoveInput src="delete.svg"  onClick={removeInput} type="reset" alt="remove seach input"/>
         </SearchField>

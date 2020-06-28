@@ -65,7 +65,7 @@ const ArticleDate = styled.div`
 `
 const ArticleImg = styled.img`
   width: 100%;
-  height: 226px;
+  min-height: 226px;
 `
 const ArticleDetail = styled.div`
   margin-left: 10px;
