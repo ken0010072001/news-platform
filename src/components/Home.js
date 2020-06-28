@@ -4,7 +4,7 @@ import axios from 'axios'
 import map from 'lodash/map'
 import { media } from '../utils/style/'
 import styled from 'styled-components'
-import Card from '../components/News_card'
+import Card from './NewsCard'
 import Header from '../components/Header'
 import InfiniteScroll from "react-infinite-scroll-component";
 import isEmpty from 'lodash/isEmpty'

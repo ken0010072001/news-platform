@@ -1,7 +1,7 @@
 import React from 'react'
 import get from 'lodash/get'
 import styled from 'styled-components'
-import { media } from '../utils/style/'
+import { media } from '../utils/style'
 import  { format } from 'date-fns'
 
 const Card = styled.a`
